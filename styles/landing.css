@@ -28,25 +28,16 @@ body.landing {
 
  .selling-points {
      position: relative;
-<<<<<<< HEAD
-     display: table;
-     width: 100%;
-=======
 
->>>>>>> checkpoint-4
 
  }
 
  .point {
-<<<<<<< HEAD
-     display: table-cell;
-     position: relative;
-     width: 33.3%;
-=======
+
 
      position: relative;
 
->>>>>>> checkpoint-4
+
      padding: 2rem;
      text-align: center;
  }

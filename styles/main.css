@@ -25,17 +25,7 @@ body {
   position: relative;
   left: 2rem;
 }
-<<<<<<< HEAD
-/* Medium and small screens (640px) */
- @media (min-width: 640px) {
-   html { font-size: 112%; }
- }
 
- /* Large screens (1024px) */
- @media (min-width: 1024px) {
-   html { font-size: 120%; }
- }
-=======
 .container {
      margin: 0 auto;
      max-width: 64rem;
@@ -61,4 +51,3 @@ body {
  @media (min-width: 1024px) {
    html { font-size: 120%; }
  }
->>>>>>> checkpoint-4
