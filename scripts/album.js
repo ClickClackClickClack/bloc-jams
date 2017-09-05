@@ -71,18 +71,23 @@ var albumPicasso = {
      }
  };
 var findParentByCLassName = function(element, chosenClass) {
-  //added if (element){} as well as && theParent.className !== null after checking work
-  if (element) {
+  if (element.parentElement == null) {
+    console.log("No parent found");
+  }
+  else if (element) {
      var theParent = element.parentElement;
-      while (theParent.className !== chosenClass && theParent.className !== null) {
+     while (theParent.className !== chosenClass && theParent.className !== null) {
          theParent = theParent.parentElement;
    }
    return theParent;
-  }
+ }
+ if (theParent == null) {
+   console.log("No parent found with that class name");
+ }
+
 };
 
 var getSongItem = function(element) {
-   //var switchClass = element.className;
    switch (element.className) {
      case 'song-item-number':
          return element;
