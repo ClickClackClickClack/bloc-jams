@@ -93,21 +93,29 @@ var currentVolume = 80;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 var $playPause = $('.main-controls .play-pause');
+//console.log($playPause);
 $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
      $previousButton.click(previousSong);
      $nextButton.click(nextSong);
-     $playPause.click(togglePlayFromPlayerBar());
+     $playPause.click(togglePlayFromPlayerBar);
  });
 
  var togglePlayFromPlayerBar = function(){
-     if(currentSoundFile.isPaused()){
+   if(currentSoundFile == null){
+     $playPause.html(playerBarPauseButton);
+     setSong(1);
+     var currentSongCell = getSongNumberCell(currentlyPlayingSongNumber);
+     currentSongCell.html(pauseButtonTemplate);
+     currentSoundFile.play();
+   }
+   else if(currentSoundFile.isPaused()){
          var currentSongCell = getSongNumberCell(currentlyPlayingSongNumber);
          currentSongCell.html(pauseButtonTemplate);
          $playPause.html(playerBarPauseButton);
          currentSoundFile.play();
      }
-     else {
+     else if(currentSoundFile.isPaused() !== true){
          var currentSongCell = getSongNumberCell(currentlyPlayingSongNumber);
          currentSongCell.html(playButtonTemplate);
          $playPause.html(playerBarPlayButton);
