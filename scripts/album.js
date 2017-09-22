@@ -3,7 +3,7 @@ var createSongRow = function(songNumber, songName, songLength) {
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
       + '  <td class="song-item-title">' + songName + '</td>'
-      + '  <td class="song-item-duration">' + songLength + '</td>'
+      + '  <td class="song-item-duration">' + filterTimeCode(songLength) + '</td>'
       + '</tr>'
       ;
 
@@ -86,7 +86,9 @@ var updateSeekBarWhileSongPlays = function() {
           var seekBarFillRatio = this.getTime() / this.getDuration();
           var $seekBar = $('.seek-control .seek-bar');
           updateSeekPercentage($seekBar, seekBarFillRatio);
-         });
+          setCurrentTimeInPlayerBar(this.getTime());
+          setTotalTimeInPlayerBar(currentSoundFile.getDuration());
+        });
      }
  };
 
@@ -153,7 +155,6 @@ var currentVolume = 80;
 var $previousButton = $('.main-controls .previous');
 var $nextButton = $('.main-controls .next');
 var $playPause = $('.main-controls .play-pause');
-//console.log($playPause);
 $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
      setupSeekBars();
@@ -189,6 +190,7 @@ var updatePlayerBarSong = function() {
   $('.currently-playing .artist-song-mobile').text(currentSongFromAlbum.title + ' - ' + currentAlbum.artist);
   $('.currently-playing .artist-name').text(currentAlbum.artist);
   $('.main-controls .play-pause').html(playerBarPauseButton);
+  //setTotalTimeInPlayerBar();
 };
 
 var nextSong = function(){
@@ -242,6 +244,29 @@ var setSong = function(songNumber){
          preload: true
      });
      setVolume(currentVolume);
+};
+
+var setCurrentTimeInPlayerBar = function(currentTime){
+  $('.current-time').text(filterTimeCode(currentTime));
+};
+
+var setTotalTimeInPlayerBar = function(totalTime){
+
+     $('.total-time').text(filterTimeCode(totalTime));
+
+};
+
+var filterTimeCode = function(timeInSeconds){
+   var totalSeconds = parseFloat(timeInSeconds);
+   var minutes = Math.floor(totalSeconds / 60);
+   var seconds = Math.floor(totalSeconds % 60);
+   if(seconds < 10){
+      var finalTime = (minutes + ':0' + seconds);
+   }
+   else{
+      var finalTime = (minutes + ':' + seconds);
+   }
+   return finalTime;
 };
 
 var seek = function(time) {
